@@ -24,3 +24,10 @@ fields_markup.insert(back_button)
 yes_no_markup = InlineKeyboardMarkup(row_width=2)
 yes_no_markup.insert(InlineKeyboardButton(text='Да', callback_data='yes'))
 yes_no_markup.insert(InlineKeyboardButton(text='Нет', callback_data='no'))
+yes_no_markup.insert(back_button)
+yes_no_markup.insert(back_to_main)
+
+
+admin_main_markup = InlineKeyboardMarkup(row_width=1)
+admin_main_markup.insert(InlineKeyboardButton(text="Выгрузить пользователей", callback_data="cleandb"))
+admin_main_markup.insert(InlineKeyboardButton(text="Отправить сообщение пользователям", callback_data='reklama'))

@@ -20,6 +20,16 @@ async def back_to_main_from_fields(call: types.CallbackQuery, state: FSMContext)
     await call.message.edit_text(text="Привет! Я бот, который поможет тебе выбрать группу по твоим интересам", reply_markup=main_markup)
     await state.finish()
 
+@dp.callback_query_handler(text='back', state=AllStates.groups_list)
+async def go_to_main(call: types.CallbackQuery, state: FSMContext):
+    await call.message.edit_text(text="Привет! Я бот, который поможет тебе выбрать группу по твоим интересам", reply_markup=main_markup)
+    await state.finish()
+
+@dp.callback_query_handler(text='back_to_main', state='*')
+async def go_to_main(call: types.CallbackQuery, state: FSMContext):
+    await state.finish()
+    await call.message.edit_text(text="Привет! Я бот, который поможет тебе выбрать группу по твоим интересам", reply_markup=main_markup)
+
 @dp.callback_query_handler(text='back', state=AllStates.send_link)
 async def back_to_main_from_fields(call: types.CallbackQuery, state: FSMContext):
     await call.message.edit_text(text='Чем вы интересуетесь?', reply_markup=fields_markup)
@@ -126,15 +136,4 @@ async def get_groups_list(call: types.CallbackQuery, state: FSMContext):
     else:
         await call.message.edit_text(text=df, reply_markup=back_markup)
     await AllStates.groups_list.set()
-
-
-@dp.callback_query_handler(text='back', state=AllStates.groups_list)
-async def go_to_main(call: types.CallbackQuery, state: FSMContext):
-    await call.message.edit_text(text="Привет! Я бот, который поможет тебе выбрать группу по твоим интересам", reply_markup=main_markup)
-    await state.finish()
-
-@dp.callback_query_handler(text='back_to_main', state='*')
-async def go_to_main(call: types.CallbackQuery, state: FSMContext):
-    await state.finish()
-    await call.message.edit_text(text="Привет! Я бот, который поможет тебе выбрать группу по твоим интересам", reply_markup=main_markup)
 
